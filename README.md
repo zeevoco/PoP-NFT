@@ -46,3 +46,5 @@ web3.fromWei(account.balance(), 'ether')
 - Deploy the contract using `deploy.py`
 `brownie run deploy.py --network polygon-test`
 
+If succesfull it should look something like
+https://user-images.githubusercontent.com/5358146/161502650-88e95e04-69c4-4640-b0ca-a94858b705f3.png
