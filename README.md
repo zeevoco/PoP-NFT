@@ -14,5 +14,35 @@ Sequence creators can optionally enable an NFT to be distributed to users upon c
 
 ## Deploy contracts to Mumbai 
 
-Coming soon... 
+
+- Create deployment_account to deploy contract 
+```
+# Optional: create deployment account
+brownie accounts generate deployment_account
+
+# Ensure created account is listed
+brownie accounts list
+```
+
+- Use Mumbai faucet to load Matic into deployment_account
+
+- Add `WEB3_INFURA_PROJECT_ID` to `.env`
+
+- Connect to the polygon-test rpc 
+```
+brownie console --network polygon-test
+
+# check if connection was successful
+network.is_active()     #   true
+network.show_active()   #   polygon-test
+
+# load deployment account
+account = accounts.load('deployment_account')
+
+# check balance
+web3.fromWei(account.balance(), 'ether')
+```
+
+- Deploy the contract using `deploy.py`
+`brownie run deploy.py --network polygon-test`
 
