@@ -26,14 +26,15 @@ brownie accounts list
 
 - Use Mumbai faucet to load Matic into deployment_account
 
-- Add `WEB3_INFURA_PROJECT_ID` to `.env`
+- Create an `.env` file and fill the values
+`cp local.env .env`
 
 - Connect to the polygon-test rpc 
 ```
 brownie console --network polygon-test
 
 # check if connection was successful
-network.is_active()     #   true
+network.is_connected()  #   true
 network.show_active()   #   polygon-test
 
 # load deployment account
