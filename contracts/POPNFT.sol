@@ -19,8 +19,6 @@ contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessC
 
     constructor() ERC721("Sequencer", "SEEK") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(PAUSER_ROLE, msg.sender);
-        _grantRole(MINTER_ROLE, msg.sender);
     }
 
     function _baseURI() internal pure override returns (string memory) {
@@ -36,10 +34,11 @@ contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessC
     }
 
     function safeMint(address to, string memory uri) public onlyRole(MINTER_ROLE) {
-        uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+
+        uint256 newTokenId = _tokenIdCounter.current();
+        _safeMint(to, newTokenId);
+        _setTokenURI(newTokenId, uri);
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
