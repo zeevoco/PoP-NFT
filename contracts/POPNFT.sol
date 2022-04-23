@@ -12,17 +12,18 @@ import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/utils/Counters.sol";
 /// @custom:security-contact Telegram @InMathsWeTrust
 contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessControl {
     using Counters for Counters.Counter;
-
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Sequencer", "SEEK") {
+    constructor() ERC721("Sequencer", "ZEEV") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://ipfs.io/ipfs/QmVuYxRTd4qiyCWZttS8FyN1s53xB4tJKbSKDCSFjerEsL";
+        return "ipfs://";
     }
 
     function pause() public onlyRole(PAUSER_ROLE) {

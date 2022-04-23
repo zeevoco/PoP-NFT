@@ -7,7 +7,7 @@ Sequence creators can optionally enable an NFT to be distributed to users upon c
 
 1) Install Brownie [https://eth-brownie.readthedocs.io/en/stable/install.html](https://eth-brownie.readthedocs.io/en/stable/install.html)
 
-2) create .env file with `WEB3_INFURA_PROJECT_ID=`
+2) create .env file with `WEB3_INFURA_PROJECT_ID=` and `POLYGONSCAN_TOKEN` if you want to verify source
 
 3) run `brownie compile` to test things are working 
 
@@ -47,5 +47,18 @@ web3.fromWei(account.balance(), 'ether')
 - Deploy the contract using `deploy.py`
 `brownie run deploy.py --network polygon-test`
 
-If succesfull it should look something like
+If successful it should look something like
 https://user-images.githubusercontent.com/5358146/161502650-88e95e04-69c4-4640-b0ca-a94858b705f3.png
+
+# Alternate Route
+`brownie console --network polygon-test`
+
+1. Load your accounts 
+`accounts.from_mnemonic('asd asd asd asd',count=10)`
+
+2. Deploy the contract 
+`POPNFT.deploy({'from': accounts[0]}, publish_source=True)`
+
+3. Mint 
+`POPNFT[3].safeMint(accounts[1], 'bafyreifqzbb54o5znnasebu3ub7w47ww2m7jylgbmouhxnyv5e5qkdw3wi/metadata.json', {'from': accounts[0]})`
+
