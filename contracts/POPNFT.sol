@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+/// @title Zeevo.co Proof of Participation NFT 
+/// @author @WolfDeFi
+/// @notice Zeevo PoP NFTs are generated from sequences at https://zeevo.co
+/// @custom:security-contact Telegram @InMathsWeTrust 
+
 import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/token/ERC721/ERC721.sol";
 import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -9,14 +14,13 @@ import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/access/AccessControl
 import "OpenZeppelin/openzeppelin-contracts@4.5.0/contracts/utils/Counters.sol";
 
 
-/// @custom:security-contact Telegram @InMathsWeTrust
 contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessControl {
     using Counters for Counters.Counter;
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Sequencer", "ZEEV") {
+    constructor() ERC721("Zeevo PoP", "ZPOP") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(PAUSER_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
@@ -36,7 +40,6 @@ contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessC
 
     function safeMint(address to, string memory uri) public onlyRole(MINTER_ROLE) {
         _tokenIdCounter.increment();
-
         uint256 newTokenId = _tokenIdCounter.current();
         _safeMint(to, newTokenId);
         _setTokenURI(newTokenId, uri);
@@ -51,7 +54,6 @@ contract POPNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, AccessC
     }
 
     // The following functions are overrides required by Solidity.
-
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }

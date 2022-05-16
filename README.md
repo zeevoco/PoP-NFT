@@ -52,6 +52,8 @@ https://user-images.githubusercontent.com/5358146/161502650-88e95e04-69c4-4640-b
 
 # Alternate Route
 `brownie console --network polygon-test`
+or for mainnet:
+`brownie console --network polygon-main`
 
 1. Load your accounts 
 `accounts.from_mnemonic('asd asd asd asd',count=10)`
@@ -61,4 +63,6 @@ https://user-images.githubusercontent.com/5358146/161502650-88e95e04-69c4-4640-b
 
 3. Mint 
 `POPNFT[3].safeMint(accounts[1], 'bafyreifqzbb54o5znnasebu3ub7w47ww2m7jylgbmouhxnyv5e5qkdw3wi/metadata.json', {'from': accounts[0]})`
+
+ 
 
